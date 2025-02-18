@@ -1,0 +1,32 @@
+<div class="calendar-container">
+  <div class="calendar-card">
+    <div class="calendar-header">
+      <button class="calendar-nav-button prev-month" (click)="goToPreviousMonth()">‹</button>
+      <h2>{{ monthNames[currentMonth] }} {{ currentYear }}</h2>
+      <button class="calendar-nav-button next-month" (click)="goToNextMonth()">›</button>
+    </div>
+    <div class="calendar">
+      <div class="day-names">
+        <div class="day">Su</div>
+        <div class="day">Mo</div>
+        <div class="day">Tu</div>
+        <div class="day">We</div>
+        <div class="day">Th</div>
+        <div class="day">Fr</div>
+        <div class="day">Sa</div>
+      </div>
+      <div class="date-grid">
+        <ng-container *ngFor="let date of daysInMonth">
+          <div *ngIf="date !== null; else emptySlot" class="date" [class.highlighted]="isToday(date)">
+            {{ date }}
+          </div>
+          <ng-template #emptySlot>
+            <div class="date empty"></div> 
+          </ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

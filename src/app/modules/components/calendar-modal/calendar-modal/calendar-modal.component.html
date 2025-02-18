@@ -1,0 +1,7 @@
+<div class="modal-backdrop" *ngIf="show">
+  <div class="modal-body">
+    <ng-content></ng-content>
+    <app-calendar></app-calendar>
+    <button (click)="close()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    margin-top: 0px;
+ 
+  
+    .calendar-card {
+      margin-bottom:  20%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background: #fff;
+      overflow: hidden;
+  
+      .calendar-header {
+        background-color: #4E89AE; 
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        position: relative;
+        &:before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+       
+        }
+  
+        h2 {
+          font-size: 24px;
+          margin: 0;
+          line-height: 1.2;
+        }
+  
+        .calendar-nav-button {
+          background: none;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        
+          &.prev-month {
+            left: 10px;
+          }
+          &.next-month {
+            right: 10px;
+          }
+        }
+      }
+  
+      .calendar {
+        padding: 15px;
+        .day-names {
+          display: flex;
+          justify-content: space-between;
+          .day {
+            font-weight: bold;
+          }
+        }
+  
+        .date-grid {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: start;
+          margin-top: 5px;
+          .date {
+            width: calc(100% / 7);
+            text-align: center;
+            margin-bottom: 5px;
+            padding: 10px 0;
+            &:nth-child(7n) {
+              border-right: none; 
+            }
+            &:nth-last-child(-n+7) {
+              border-bottom: none;
+            }
+          }
+          .highlighted {
+            background-color: #ED6663; 
+            
+          }
+        }
+      }
+    }
+  }
+  
