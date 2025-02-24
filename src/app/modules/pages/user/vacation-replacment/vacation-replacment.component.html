@@ -1,1 +1,26 @@
-<p>vacation-replacment works!</p>
+<div class="replacement-requests">
+  <h3>Replacement Requests</h3>
+  <ul>
+    <li *ngFor="let request of replacementRequests">
+      <p>Employee: {{ request.createdBy }}</p>
+      <p>From: {{ request.fromDate | date }}</p>
+      <p>To: {{ request.toDate | date }}</p>
+      <p>Notes: {{ request.notes }}</p>
+      <button class="approve-button" (click)="approveRequest(request.id)">Approve</button>
+      <button class="reject-button" (click)="rejectRequest(request.id)">Reject</button>
+    </li>
+  </ul>
+</div>
+
+<div class="approval-history">
+  <h3>Approval History</h3>
+  <ul>
+    <li *ngFor="let response of replacementResponse">
+      <p>Employee: {{ response.createdBy }}</p>
+      <p>From: {{ response.fromDate | date }}</p>
+      <p>To: {{ response.toDate | date }}</p>
+      <p>Notes: {{ response.notes }}</p>
+      <p>Manager Approval Status: {{ response.status }}</p>
+    </li>
+  </ul>
+</div>
