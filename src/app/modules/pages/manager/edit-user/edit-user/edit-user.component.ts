@@ -29,6 +29,7 @@ export class EditUserComponent implements OnInit {
     notes: '',
     createdBy: '',
     userId: 0,
+    replacementUserId: 0
   };
 
   constructor(
@@ -47,12 +48,11 @@ export class EditUserComponent implements OnInit {
     });
   }
 
- 
   ngOnInit() {
     this.getUser();
     this.getUserVacationRequest();
   }
-  
+
   handleShowChange(show: boolean) {
     this.showCalendar = show;
   }
@@ -79,7 +79,6 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-
   getSelectedUserDaysOff(userId: number) {
     this.userService.getUserDaysOffById(userId).subscribe({
       next: (daysOff) => {
@@ -100,9 +99,6 @@ export class EditUserComponent implements OnInit {
       });
     }
   }
-  
-
-          
   saveChanges() {
     if (this.editForm.valid) {
       const updatedUser: UserResponseDto = {
@@ -126,18 +122,18 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-  getUserVacationRequest() {
+  getUserVacationRequest(): void {
     const userId = this.route.snapshot.params['id'];
     if (userId) {
-      this.vacationRequestService.getAllVacationRequestsById(userId).subscribe({
+      this.vacationRequestService.getApprovedVactionsList(userId).subscribe({
         next: (response) => {
           this.userRequestNotes = response;
         },
         error: (error) => {
-          this.toastService.show(
-            `${error.error || 'Error getting vacations!'}`,
-            'error'
-          );
+                this.toastService.show(
+                  `${error.error || 'Error fetching approved vacations!'}`,
+                  'error'
+                );
         },
       });
     } else {
@@ -146,7 +142,7 @@ export class EditUserComponent implements OnInit {
         'error'
       );
     }
-  }
+  }  
 
   approveUserRequest(id: number) {
     if (id) {
@@ -154,7 +150,7 @@ export class EditUserComponent implements OnInit {
         next: (response) => {
           this.toastService.show(response.message, 'success');
           this.getUserVacationRequest();
-          this.updateSelectedUserDaysOff(); 
+          this.updateSelectedUserDaysOff();
         },
         error: (error) => {
           this.toastService.show(
@@ -177,7 +173,7 @@ export class EditUserComponent implements OnInit {
         next: (response) => {
           this.toastService.show(response.message, 'success');
           this.getUserVacationRequest();
-          this.updateSelectedUserDaysOff(); 
+          this.updateSelectedUserDaysOff();
         },
         error: (error) => {
           this.toastService.show(
@@ -213,6 +209,7 @@ export class EditUserComponent implements OnInit {
               notes: '',
               createdBy: '',
               userId: 0,
+              replacementUserId: 0,
             };
           },
           error: (error) => {

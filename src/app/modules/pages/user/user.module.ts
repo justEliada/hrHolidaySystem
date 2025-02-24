@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router'; 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared.module';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { VacationsListComponent } from './vacations-list/vacations-list.component';
 import { VacationReplacmentComponent } from './vacation-replacment/vacation-replacment.component';
@@ -18,7 +19,7 @@ const routes: Routes = [
     },
     {
       path: 'vacation-replacment',
-      component: VacationsListComponent
+      component: VacationReplacmentComponent
     },
 ];
 
@@ -34,6 +35,7 @@ const routes: Routes = [
     FormsModule,
     SharedModule,
     RouterModule.forChild(routes),
+    MatAutocompleteModule,
   ],
   exports: [RouterModule] 
   

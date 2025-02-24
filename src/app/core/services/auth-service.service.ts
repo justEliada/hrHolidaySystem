@@ -15,13 +15,36 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient) { }
 
+  // login(username: string, password: string): Observable<User> {
+  //   return this.http.post<User>(`${this.baseUrl}/login`, { username, password }, { observe: 'response' })
+  //     .pipe(
+  //       map(response => {
+  //         if (response.status === 200 && response.body) {
+  //           localStorage.setItem('currentUser', JSON.stringify(response.body));
+  //           this.setAuthentication(true);
+  //           return response.body;
+  //         } else {
+  //           throw new Error('Failed to login');
+  //         }
+  //       }),
+  //       catchError(error => {
+  //         localStorage.removeItem('currentUser');
+  //         this.setAuthentication(false);
+  //         return throwError(() => new Error(error.error));
+  //       })
+  //     );
+  // }
+
   login(username: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/login`, { username, password }, { observe: 'response' })
       .pipe(
         map(response => {
           if (response.status === 200 && response.body) {
             localStorage.setItem('currentUser', JSON.stringify(response.body));
+            const userId = response.body.id; 
+            localStorage.setItem('userId', userId.toString());
             this.setAuthentication(true);
+            
             return response.body;
           } else {
             throw new Error('Failed to login');
@@ -29,11 +52,14 @@ export class AuthServiceService {
         }),
         catchError(error => {
           localStorage.removeItem('currentUser');
+          localStorage.removeItem('userId');
           this.setAuthentication(false);
+          
           return throwError(() => new Error(error.error));
         })
       );
   }
+  
 
   getCurrentUser(): User | null {
     const userJson = localStorage.getItem('currentUser');
