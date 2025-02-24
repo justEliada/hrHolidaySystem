@@ -62,18 +62,18 @@ export class SideBarComponent implements OnInit {
 
   getVacationsReplacment(){
     const userRole = this.userRole.toUpperCase(); 
+    console.log('User Role:', userRole); 
     switch(userRole) {
       case 'MANAGER':
         this.router.navigate(['/dashboard']);
         break;
       case 'USER':
-        this.router.navigate(['/user-dashboard/vacations-list']);
+        this.router.navigate(['/user-dashboard/vacation-replacment']);
         break;
       default:
         console.error('Unexpected role:', userRole);
         break;
     }
-
   }
 
   logout() {
